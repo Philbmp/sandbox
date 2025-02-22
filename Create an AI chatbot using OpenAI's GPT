@@ -1,0 +1,56 @@
+"""
+Create an AI chatbot using OpenAI's GPT
+"""
+import openai  # Import OpenAI's API client
+
+# Set your OpenAI API key:
+# Here's how:
+#  https://platform.openai.com/signup/
+# Navigate to "View API Keys"
+# Click "Create new secret key" and copy it.
+# Replace "your_openai_api_key" with copied key.
+
+openai.api_key = "your_openai_api_key"
+
+def chat_with_gpt(prompt):
+    """
+    Sends user input to OpenAI GPT API and retrieves the chatbot's response.
+
+    Args:
+        prompt (str): The user's input message.
+
+    Returns:
+        str: The AI-generated response from GPT.
+    """
+    try:
+        response = openai.ChatCompletion.create(
+            model="gpt-3.5-turbo",  # Use "gpt-4" if you have access for better results
+            messages=[
+                {"role": "system", "content": "You are a helpful AI chatbot."},  # System message to define chatbot behavior
+                {"role": "user", "content": prompt}  # User input message
+            ]
+        )
+        # Extract and return the AI-generated response
+        return response['choices'][0]['message']['content'].strip()
+    
+    except Exception as e:
+        return f"Error: {e}"  # Handle API errors gracefully
+
+def main():
+    """
+    Runs the chatbot in a loop, allowing continuous conversation.
+    """
+    print("🤖 AI Chatbot: Type 'exit' to end the chat.")  # Welcome message
+
+    while True:
+        user_input = input("You: ")  # Get user input
+
+        if user_input.lower() == "exit":  # Check if user wants to exit
+            print("Chatbot: Goodbye! 👋")  # Exit message
+            break  # Stop the loop
+
+        response = chat_with_gpt(user_input)  # Call the function to get AI response
+        print(f"Chatbot: {response}")  # Display AI's response
+
+if __name__ == "__main__":
+    main()  # Start the chatbot
