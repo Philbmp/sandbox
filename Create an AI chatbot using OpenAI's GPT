@@ -3,6 +3,7 @@ Create an AI chatbot using OpenAI's GPT
 """
 import openai  # Import OpenAI's API client
 
+# Open a terminal and enter "pip install openai"
 # Set your OpenAI API key:
 # Here's how:
 #  https://platform.openai.com/signup/
@@ -54,3 +55,5 @@ def main():
 
 if __name__ == "__main__":
     main()  # Start the chatbot
+# To run, enter "python chatbot.py"
+# Chat with the AI.  To end it, type "exit"
